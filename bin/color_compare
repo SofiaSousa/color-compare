@@ -1,0 +1,44 @@
+require_relative 'color'
+
+class ColorCompare
+	# attr_accessor :first_color, :second_color, :method
+
+	# METHODS = [:euclidean]
+
+	# # default values
+	# # @color_code = COLOR_CODES[0]
+	# @method = METHODS[0]
+
+	# def self.difference(first_color, second_color, params = {})
+	# 	# init var
+	# 	@first_color  = Color.new(first_color)
+	# 	@second_color = Color.new(second_color)
+
+	# 	@method = params[:method] if params[:method] && METHODS.include?(params[:method])
+
+ #    euclidean_distante if @method == :euclidean
+	# end
+
+	# private
+
+	# def self.euclidean_distante
+	# 	first_color  = @first_color.to_rgb
+	# 	second_color = @second_color.to_rgb
+
+	# 	# puts "first_color #{first_color}"
+	# 	# puts "second_color #{second_color}"
+		
+	# 	# puts "first_color #{first_color}"
+	# 	# puts "second_color #{second_color}"
+
+	# 	r1, g1, b1 = Color.rgb_to_array(first_color)
+	# 	r2, g2, b2 = Color.rgb_to_array(second_color)
+
+	# 	r = (r2 - r1)**2
+	# 	g = (g2 - g1)**2
+	# 	b = (b2 - b1)**2
+
+	# 	distance = Math.sqrt(r + g + b) / Math.sqrt( 255 ** 2 +  255 ** 2 + 255 ** 2)
+	# 	percent = ((1 - distance) * 100).round
+	# end
+end
