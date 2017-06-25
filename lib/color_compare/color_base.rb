@@ -1,27 +1,27 @@
 require_relative 'exception_handler'
 require_relative 'error_message'
-require_relative 'float' # '../lib/ss_generator/helpers'
+require_relative 'float'
 
 # module ColorCompare
 	class ColorBase
-		METHODS = [:euclidean]
-		CODES   = [:rgb, :hex, :hsl, :cielab]
+		METHODS = [:euclidean, :deltaecie]
+		CODES   = [:rgb, :hex, :hsl, :xyz, :cielab]
 
-		attr_accessor :color, :code
+		attr_accessor :color, :code, :method
 
-		def initialize(color, code = nil)
-		end
-
-		def to_s 
+ 		def initialize(color, code = nil)
+			self.method = METHODS[0]
 		end
 		
-		def to_array 
-		end
-
 		# Compares self Color with a given one
 		def compare_with(o_color, params = {})
-			@method = params[:method] if params[:method] && METHODS.include?(params[:method])
-	    Euclidean.calculate(self, o_color) if @method == :euclidean
+			self.method = params[:method] if params[:method] && METHODS.include?(params[:method])
+
+			puts "method"
+			puts self.method
+
+	    Euclidean.calculate(self, o_color) if self.method == :euclidean
+	    DeltaECIE.calculate(self, o_color) if self.method == :deltaecie
 		end
 	end
 # end

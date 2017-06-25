@@ -2,8 +2,11 @@ require 'color_compare/color/rgb'
 
 RSpec.describe RGB do
 	let(:white) { { :string => 'rgb(255, 255, 255)', :array => [255, 255, 255] } }
+	let(:grey)  { { :string => 'rgb(128, 128, 128)', :array => [128, 128, 128] } }
 	let(:black) { { :string => 'rgb(0, 0, 0)',       :array => [0, 0, 0]       } }
 	let(:red)   { { :string => 'rgb(255, 0, 0)',     :array => [255, 0, 0]     } }
+	let(:green) { { :string => 'rgb(0, 255, 0)',     :array => [0, 255, 0]     } }
+	let(:blue)  { { :string => 'rgb(0, 0, 255)',     :array => [0, 0, 255]     } }
 
 	context 'when right color format' do
 	  it 'initializes color given a string' do
@@ -67,21 +70,30 @@ RSpec.describe RGB do
 	  	expect(color.to_xyz).to eq 'xyz(41.24, 21.26, 1.93)'
 
 	  	color = RGB.new('rgb(244, 64, 52)')
-	  	expect(color.to_xyz).to eq 'xyz(39.76, 23.15, 5.62)'
+	  	expect(color.to_xyz).to eq 'xyz(39.761, 23.148, 5.621)'
 	  end
 
 	  it 'converts to cielab' do
 	  	color = RGB.new(white[:array])
 	  	expect(color.to_cielab).to eq 'cielab(100%, 0.0053, -0.0104)'
 
+	  	color = RGB.new(grey[:array])
+	  	expect(color.to_cielab).to eq 'cielab(53.585%, 0.0056, -0.006)'
+
 	  	color = RGB.new(black[:string])
 	  	expect(color.to_cielab).to eq 'cielab(0%, 0, 0)'
 
 	  	color = RGB.new(red[:array])
-	  	expect(color.to_cielab).to eq 'cielab(53%, 80.1093, 67.2201)'
+	  	expect(color.to_cielab).to eq 'cielab(53.2329%, 80.1093, 67.2201)'
+
+	  	color = RGB.new(green[:array])
+	  	expect(color.to_cielab).to eq 'cielab(87.737%, -86.1846, 83.1812)'
+
+	  	color = RGB.new(blue[:array])
+	  	expect(color.to_cielab).to eq 'cielab(32.3026%, 79.1967, -107.8637)'
 
 	  	color = RGB.new('rgb(244, 64, 52)')
-	  	expect(color.to_cielab).to eq 'cielab(55%, 66.9327, 48.3388)'
+	  	expect(color.to_cielab).to eq 'cielab(55.2245%, 66.9447, 48.3308)'
 	  end
 	end
 

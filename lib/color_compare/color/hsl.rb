@@ -54,7 +54,11 @@ require 'color_compare/color_base'
 		#
 		#   Example of to_s goes here ...
 		def to_s
-			"hsl(#{self.h}, #{(self.s * 100).round(0)}%, #{(self.l * 100).round(0)}%)"
+		  h_s = self.h.round(0)
+		  s_s = (self.s * 100).round(0)
+		  l_s = (self.l * 100).round(0)
+
+			"hsl(#{h_s}, #{s_s}%, #{l_s}%)"
 		end
 
 		##
@@ -113,9 +117,9 @@ require 'color_compare/color_base'
 	      b = hue_to_rgb(p, q, m_h - 1 / 3.to_f)
 	    end
 
-	    r = (r * 255).round(0)
-	    g = (g * 255).round(0)
-	    b = (b * 255).round(0)
+	    r = r * 255
+	    g = g * 255
+	    b = b * 255
 
 			RGB.new([r, g, b]).to_s
 		end

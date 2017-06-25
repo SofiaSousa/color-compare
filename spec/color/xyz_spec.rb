@@ -38,7 +38,7 @@ RSpec.describe XYZ do
 	  	color = XYZ.new(red[:string])
 	  	expect(color.to_rgb).to eq 'rgb(255, 0, 0)'
 
-	  	color = XYZ.new('xyz(39.76, 23.15, 5.62)')
+	  	color = XYZ.new('xyz(39.761, 23.148, 5.621)')
 	  	expect(color.to_rgb).to eq 'rgb(244, 64, 52)'
 	  end
 
@@ -52,7 +52,7 @@ RSpec.describe XYZ do
 	  	color = XYZ.new(red[:string])
 	  	expect(color.to_hex).to eq '#ff0000'
 
-	  	color = XYZ.new('xyz(39.76, 23.15, 5.62)')
+	  	color = XYZ.new('xyz(39.761, 23.148, 5.621)')
 	  	expect(color.to_hex).to eq '#f44034'
 	  end
 
@@ -66,7 +66,7 @@ RSpec.describe XYZ do
 	  	color = XYZ.new(red[:array])
 	  	expect(color.to_hsl).to eq 'hsl(0, 100%, 50%)'
 
-	  	color = XYZ.new('xyz(39.76, 23.15, 5.62)')
+	  	color = XYZ.new('xyz(39.761, 23.148, 5.621)')
 	  	expect(color.to_hsl).to eq 'hsl(4, 90%, 58%)'
 	  end
 
@@ -78,10 +78,10 @@ RSpec.describe XYZ do
 	  	expect(color.to_cielab).to eq 'cielab(0%, 0, 0)'
 
 	  	color = XYZ.new(red[:array])
-	  	expect(color.to_cielab).to eq 'cielab(53%, 80.1093, 67.2201)'
+	  	expect(color.to_cielab).to eq 'cielab(53.2329%, 80.1093, 67.2201)'
 
-	  	color = XYZ.new('xyz(39.76, 23.15, 5.62)')
-	  	expect(color.to_cielab).to eq 'cielab(55%, 66.9327, 48.3388)'
+	  	color = XYZ.new('xyz(39.761, 23.148, 5.621)')
+	  	expect(color.to_cielab).to eq 'cielab(55.2245%, 66.9447, 48.3308)'
 	  end
 	end
 
@@ -93,7 +93,7 @@ RSpec.describe XYZ do
 	  	expect { XYZ.new('xyz(0, -2, 255)') }
 	      .to raise_error(ExceptionHandler::ColorFormatError, ErrorMessage.wrong_color_format)
 
-	  	expect { XYZ.new('xyz(0, 255, 300.123)') }
+	  	expect { XYZ.new('xyz(0, 255, 300.1234)') }
 	      .to raise_error(ExceptionHandler::ColorFormatError, ErrorMessage.wrong_color_format)
 	  end
 	end

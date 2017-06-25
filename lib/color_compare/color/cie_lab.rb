@@ -37,12 +37,14 @@ require 'color_compare/color_base'
 			rescue Exception => e
 				raise ExceptionHandler::ColorFormatError, ErrorMessage.wrong_color_format
 			end
+
+			super
 		end
 
 		##
 		# This method returns CIELab format regular expression
 		def self.regular_expression
-			/\Acielab\(\d{1,3}%(\,\s?\-?\d{1,3}(\.\d{1,4})?){2}\)\z/i
+			/\Acielab\(\d{1,3}(\.\d{1,4})?%(\,\s?\-?\d{1,3}(\.\d{1,4})?){2}\)\z/i
 		end
 
 		##
@@ -52,7 +54,13 @@ require 'color_compare/color_base'
 		#
 		#   Example of to_s goes here ...
 		def to_s
-			"cielab(#{(self.l * 100).round(0)}%, #{self.a}, #{self.b})"
+			l_s = self.l.to_f * 100
+
+			l_s = l_s.has_decimals? ? l_s.to_i : l_s.round(4)
+			a_s = self.a.to_f.has_decimals? ? self.a.to_i : self.a.round(4)
+		  b_s = self.b.to_f.has_decimals? ? self.b.to_i : self.b.round(4)
+
+			"cielab(#{l_s}%, #{a_s}, #{b_s})"
 		end
 
 		##
@@ -65,8 +73,8 @@ require 'color_compare/color_base'
 
 			m_color = m_color.split(',')
 			m_color[0] = m_color[0].to_f / 100
-			m_color[1] = m_color[1].to_f.round(4)  
-			m_color[2] = m_color[2].to_f.round(4)
+			m_color[1] = m_color[1].to_f
+			m_color[2] = m_color[2].to_f
 			m_color 
 		end
 
@@ -93,31 +101,8 @@ require 'color_compare/color_base'
 			end
 		end
 
-		##
-		# This method returns the color in xyz format
-		def to_xyz
-			lab = []
-
-			lab[1] = (self.l * 100 + 16) / 116
-			lab[0] = self.a / 500 + lab[1]
-			lab[2] = lab[1] - self.b / 200
-
-			puts "lab"
-			puts lab
-
-			lab = lab.collect do |c| 
-				c = c ** 3 > 0.008856 ? c ** 3 : ( c - 16 / 116 ) / 7.787
-			end
-
-			x = lab[0] * CIELab::Reference[:x]
-			y = lab[1] * CIELab::Reference[:y]
-			z = lab[2] * CIELab::Reference[:z]
-
-			x = x.has_decimals? ? x.to_i : x.round(2)
-		  y = y.has_decimals? ? y.to_i : y.round(2)
-		  z = z.has_decimals? ? z.to_i : z.round(2)
-			
-			XYZ.new([x, y, z]).to_s
+		def to_cielab
+			self.to_s
 		end
 
 		##
@@ -136,6 +121,26 @@ require 'color_compare/color_base'
 		# This method returns the color in hsl format
 		def to_hsl
 			RGB.new(to_rgb).to_hsl
+		end
+
+		##
+		# This method returns the color in xyz format
+		def to_xyz
+			lab = []
+
+			lab[1] = (self.l * 100 + 16) / 116.to_f
+			lab[0] = (self.a / 500.to_f) + lab[1]
+			lab[2] = lab[1] - self.b / 200.to_f
+
+			lab = lab.collect do |c| 
+				c = c ** 3 > 0.008856 ? c ** 3 : ( c - (16 / 116.to_f) ) / 7.787
+			end
+
+			x = lab[0] * CIELab::Reference[:x]
+			y = lab[1] * CIELab::Reference[:y]
+			z = lab[2] * CIELab::Reference[:z]
+			
+			XYZ.new([x, y, z]).to_s
 		end
 	end
 
