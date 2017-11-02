@@ -1,6 +1,6 @@
-require 'color_compare/color_base'
-require 'color_compare/color/cie_lab'
-require 'color_compare/color/xyz'
+require 'color_match/color_base'
+require 'color_match/color/cie_lab'
+# require 'color_match/color/xyz'
 
 # module ColorCompare
 	class RGB < ColorBase
@@ -50,7 +50,11 @@ require 'color_compare/color/xyz'
 		#
 		#   Example of to_s goes here ...
 		def to_s
-			"rgb(#{self.r}, #{self.g}, #{self.b})"
+			r_s = self.r.round(0)
+	    g_s = self.g.round(0)
+	    b_s = self.b.round(0)
+
+			"rgb(#{r_s}, #{g_s}, #{b_s})"
 		end
 
 		##
@@ -87,6 +91,12 @@ require 'color_compare/color/xyz'
 			else
 				false
 			end
+		end
+
+		##
+		# This method returns the color in rgb format
+		def to_rgb
+			self.to_s
 		end
 
 		##
@@ -130,10 +140,6 @@ require 'color_compare/color/xyz'
 		    h = h * 60.to_f
 		  end
 
-		  h = h.round(0)
-		  s = s.has_decimals? ? s.to_i : s.round(2)
-		  l = l.has_decimals? ? l.to_i : l.round(2)
-
 			HSL.new([h, s, l]).to_s
 		end
 
@@ -152,10 +158,6 @@ require 'color_compare/color/xyz'
 			x = rgb[0] * 0.4124 + rgb[1] * 0.3576 + rgb[2] * 0.1805
 			y = rgb[0] * 0.2126 + rgb[1] * 0.7152 + rgb[2] * 0.0722
 			z = rgb[0] * 0.0193 + rgb[1] * 0.1192 + rgb[2] * 0.9505
-      
-		  x = x.has_decimals? ? x.to_i : x.round(2)
-		  y = y.has_decimals? ? y.to_i : y.round(2)
-		  z = z.has_decimals? ? z.to_i : z.round(2)
 
       XYZ.new([x, y, z]).to_s
 		end

@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    color_compare (0.1.0)
+    color_match (0.1.0)
 
 GEM
   remote: https://rubygems.org/
@@ -25,7 +25,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  color_compare!
+  color_match!
   rspec (>= 3.6.0)
 
 BUNDLED WITH

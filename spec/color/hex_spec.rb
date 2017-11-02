@@ -1,4 +1,4 @@
-require 'color_compare/color/hex'
+require 'color_match/color/hex'
 
 RSpec.describe HEX do
 	let(:white) { { :string => '#FFFFFF', :array => ['FF', 'FF', 'FF'] } }
@@ -67,7 +67,7 @@ RSpec.describe HEX do
 	  	expect(color.to_xyz).to eq 'xyz(41.24, 21.26, 1.93)'
 
 	  	color = HEX.new('#f44034')
-	  	expect(color.to_xyz).to eq 'xyz(39.76, 23.15, 5.62)'
+	  	expect(color.to_xyz).to eq 'xyz(39.761, 23.148, 5.621)'
 	  end
 
 	  it 'converts to cielab' do
@@ -78,10 +78,10 @@ RSpec.describe HEX do
 	  	expect(color.to_cielab).to eq 'cielab(0%, 0, 0)'
 
 	  	color = HEX.new(red[:array])
-	  	expect(color.to_cielab).to eq 'cielab(53%, 80.1093, 67.2201)'
+	  	expect(color.to_cielab).to eq 'cielab(53.2329%, 80.1093, 67.2201)'
 
 	  	color = HEX.new('#f44034')
-	  	expect(color.to_cielab).to eq 'cielab(55%, 66.9327, 48.3388)'
+	  	expect(color.to_cielab).to eq 'cielab(55.2245%, 66.9447, 48.3308)'
 	  end
 	end
 

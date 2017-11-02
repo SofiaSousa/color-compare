@@ -1,4 +1,4 @@
-require 'color_compare/color_base'
+require 'color_match/color_base'
 
 # module ColorCompare
 	class XYZ < ColorBase
@@ -27,7 +27,7 @@ require 'color_compare/color_base'
 		##
 		# This method returns XYZ format regular expression
 		def self.regular_expression
-			/\Axyz\(\d{1,3}(\.\d{1,2})?(\,\s?\d{1,3}(\.\d{1,2})?){2}\)\z/i
+			/\Axyz\(\d{1,3}(\.\d{1,3})?(\,\s?\d{1,3}(\.\d{1,3})?){2}\)\z/i
 		end
 
 		##
@@ -37,7 +37,11 @@ require 'color_compare/color_base'
 		#
 		#   Example of to_s goes here ...
 		def to_s
-			"xyz(#{self.x}, #{self.y}, #{self.z})"
+			x_s = self.x.to_f.has_decimals? ? self.x.to_i : self.x.round(3)
+		  y_s = self.y.to_f.has_decimals? ? self.y.to_i : self.y.round(3)
+		  z_s = self.z.to_f.has_decimals? ? self.z.to_i : self.z.round(3)
+
+			"xyz(#{x_s}, #{y_s}, #{z_s})"
 		end
 
 		##
@@ -49,9 +53,9 @@ require 'color_compare/color_base'
 			m_color.delete!(')')
 
 			m_color = m_color.split(',')
-			m_color[0] = m_color[0].to_f.has_decimals? ? m_color[0].to_i : m_color[0].to_f.round(2)
-			m_color[1] = m_color[1].to_f.has_decimals? ? m_color[1].to_i : m_color[1].to_f.round(2)  
-			m_color[2] = m_color[2].to_f.has_decimals? ? m_color[2].to_i : m_color[2].to_f.round(2)
+			m_color[0] = m_color[0].to_f
+			m_color[1] = m_color[1].to_f  
+			m_color[2] = m_color[2].to_f
 			m_color 
 		end
 
@@ -62,6 +66,7 @@ require 'color_compare/color_base'
 			if self.color.kind_of?(String)
 				valid = !!XYZ.regular_expression.match(self.color)
 			end
+
 			valid
 			#valid && self.x.between?(0, 1) && self.y.between?(0, 1) && self.z.between?(0, 1)
 		end
@@ -127,9 +132,6 @@ require 'color_compare/color_base'
 			l = (116 * xyz[1] - 16) / 100
 			a = 500 * (xyz[0] - xyz[1])
 			b = 200 * (xyz[1] - xyz[2])
-
-		  a = a.has_decimals? ? a.to_i : a.round(4)
-		  b = b.has_decimals? ? b.to_i : b.round(4)
 
 			CIELab.new([l, a, b]).to_s
 		end
