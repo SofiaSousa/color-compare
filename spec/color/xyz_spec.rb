@@ -1,4 +1,4 @@
-require 'color_compare/color/xyz'
+require 'color_match/color/xyz'
 
 RSpec.describe XYZ do
 	let(:white) { { :string => 'xyz(95.05, 100, 108.9)', :array => [95.05, 100, 108.9] } }

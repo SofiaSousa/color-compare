@@ -1,4 +1,4 @@
-require 'color_compare/color/hsl'
+require 'color_match/color/hsl'
 
 RSpec.describe HSL do
 	let(:white) { { :string => 'hsl(0, 0%, 100%)',  :array => [0, 0, 1]   } }

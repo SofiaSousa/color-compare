@@ -1,4 +1,4 @@
-require 'color_compare/color/rgb'
+require 'color_match/color/rgb'
 
 RSpec.describe RGB do
 	let(:white) { { :string => 'rgb(255, 255, 255)', :array => [255, 255, 255] } }

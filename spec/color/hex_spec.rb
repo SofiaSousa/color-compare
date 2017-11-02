@@ -1,4 +1,4 @@
-require 'color_compare/color/hex'
+require 'color_match/color/hex'
 
 RSpec.describe HEX do
 	let(:white) { { :string => '#FFFFFF', :array => ['FF', 'FF', 'FF'] } }

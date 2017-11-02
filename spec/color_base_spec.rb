@@ -1,5 +1,5 @@
-# require 'color_compare/color_base'
-# require 'color_compare/color/color'
+# require 'color_match/color_base'
+# require 'color_match/color/color'
 
 # RSpec.describe ColorBase do
 # 	let(:white_rgb) { { :string => 'rgb(255, 255, 255)', :array => [255, 255, 255] } }

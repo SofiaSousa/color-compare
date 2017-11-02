@@ -1,4 +1,4 @@
-require 'color_compare/color_base'
+require 'color_match/color_base'
 
 # module ColorCompare
 	class XYZ < ColorBase

@@ -4,7 +4,7 @@ require_relative 'float'
 
 # module ColorCompare
 	class ColorBase
-		METHODS = [:euclidean, :deltaecie]
+		METHODS = [:euclidean, :cie76]
 		CODES   = [:rgb, :hex, :hsl, :xyz, :cielab]
 
 		attr_accessor :color, :code, :method
@@ -17,11 +17,16 @@ require_relative 'float'
 		def compare_with(o_color, params = {})
 			self.method = params[:method] if params[:method] && METHODS.include?(params[:method])
 
-			puts "method"
-			puts self.method
+			first_color  = self
+			second_color = o_color
 
-	    Euclidean.calculate(self, o_color) if self.method == :euclidean
-	    DeltaECIE.calculate(self, o_color) if self.method == :deltaecie
+			if self.method == :euclidean
+				first_color  = RGB.new(first_color.to_rgb)
+			  second_color = RGB.new(second_color.to_rgb)
+	    	
+	    	Euclidean.calculate(first_color, second_color)
+	    end   
+	    # DeltaECIE.calculate(self, o_color) if self.method == :cie76
 		end
 	end
 # end

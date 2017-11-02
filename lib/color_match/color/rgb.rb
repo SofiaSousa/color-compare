@@ -1,6 +1,6 @@
-require 'color_compare/color_base'
-require 'color_compare/color/cie_lab'
-# require 'color_compare/color/xyz'
+require 'color_match/color_base'
+require 'color_match/color/cie_lab'
+# require 'color_match/color/xyz'
 
 # module ColorCompare
 	class RGB < ColorBase

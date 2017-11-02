@@ -1,4 +1,4 @@
-require 'color_compare/color/rgb'
+require 'color_match/color/rgb'
 
 RSpec.describe CIELab do	
 	let(:white) { { :string => 'cielab(100%, 0.0053, -0.0104)', :array => [1, 0.0053, -0.0104]} }
